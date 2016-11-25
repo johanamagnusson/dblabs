@@ -3,3 +3,8 @@ CREATE TABLE Departments (
     name TEXT PRIMARY KEY,
     abbr TEXT UNIQUE
 );
+DROP TABLE IF EXISTS Programs CASCADE;
+CREATE TABLE Programs (
+    name TEXT PRIMARY KEY,
+    abbr TEXT
+);
