@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS Departments CASCADE;
+CREATE TABLE Departments (
+    name TEXT PRIMARY KEY,
+    abbr TEXT UNIQUE
+);
