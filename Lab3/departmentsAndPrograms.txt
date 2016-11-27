@@ -1,0 +1,28 @@
+Departments----------
+Computer Science	CS
+Computer Engineering	CE
+Physics	P
+Electronics	E
+Mathematics	M
+Chemistry	CH
+Biology	B
+Departments----------
+Information Technology	IT
+Computer Science and Engineering	CSE
+Engineering Physics	EP
+Engineering Electronics	EE
+Engineering Chemistry	EC
+Engineering Chemistry with Phyiscs	ECP
+Biotechnology	BIO
+Mathematics Program	MP
+HostedBy---------
+Information Technology	Computer Science
+Computer Science and Engineering	Computer Science
+Computer Science and Engineering	Computer Engieering
+Engineering Physics	Physics
+Engineering Electronics	Electronics
+Engineering Chemistry	Chemistry
+Engineering Chemistry with Phyiscs	Chemistry
+Engineering Chemistry with Phyiscs	Physics
+Biotechnology	Biology
+Mathematics Program	Mathematics
