@@ -1,8 +1,8 @@
 
 def depProgInsert(writeFile):
-    depInsertString         = "INSERT INTO Departments(name, abbr) VALUES ('{0}', '{1}');\n"
-    progInsertString        = "INSERT INTO Programs(name, abbr) VALUES ('{0}', '{1}');\n"
-    hostedByInsertString    = "INSERT INTO HostedBy(programName, departmentName) VALUES ('{0}', '{1}');\n"
+    depInsertString         = "INSERT INTO Departments (name, abbr) VALUES ('{0}', '{1}');\n"
+    progInsertString        = "INSERT INTO Programs (name, abbr) VALUES ('{0}', '{1}');\n"
+    hostedByInsertString    = "INSERT INTO HostedBy (programName, departmentName) VALUES ('{0}', '{1}');\n"
 
     readFile = open("departmentsAndPrograms.txt")
     lines = [line.rstrip("\n") for line in readFile]

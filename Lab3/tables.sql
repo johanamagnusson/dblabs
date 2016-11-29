@@ -33,15 +33,111 @@ CREATE TABLE Students (
     name TEXT NOT NULL,
     studentID INT NOT NULL UNIQUE,
     program TEXT REFERENCES Programs (name),
-    UNIQUE program
+    UNIQUE (personNr, program)
 );
 
 DROP TABLE IF EXISTS Selected CASCADE;
 CREATE TABLE Selected (
-    student TEXT PRIMARY KEY,
+    student INT PRIMARY KEY,
     branch TEXT,
     program TEXT,
     FOREIGN KEY (student, program) REFERENCES Students (personNr, program),
-    UNIQUE (student, program)
-    --(branch, program) REFERENCES Branches (name, program)
+    FOREIGN KEY (branch, program) REFERENCES Branches (name, program)
+);
+
+DROP TABLE IF EXISTS Courses CASCADE;
+CREATE TABLE Courses (
+    code CHAR(6) PRIMARY KEY,
+    name TEXT NOT NULL,
+    credits FLOAT NOT NULL,
+    department TEXT REFERENCES Departments (name)
+);
+
+DROP TABLE IF EXISTS LimitedCourses CASCADE;
+CREATE TABLE LimitedCourses (
+    code CHAR(6) PRIMARY KEY,
+    maxStudents INT NOT NULL,
+    FOREIGN KEY (code) REFERENCES Courses (code)
+);
+
+DROP TABLE IF EXISTS Classifications CASCADE;
+CREATE TABLE Classifications (
+    name TEXT PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS ClassifiedBy CASCADE;
+CREATE TABLE ClassifiedBy (
+    course CHAR(6),
+    classification TEXT,
+    PRIMARY KEY (course, classification),
+    FOREIGN KEY (course) REFERENCES Courses (code),
+    FOREIGN KEY (classification) REFERENCES Classifications (name)
+);
+
+DROP TABLE IF EXISTS HasPrerequisities CASCADE;
+CREATE TABLE HasPrerequisities (
+    course CHAR(6),
+    prerequisity CHAR(6),
+    PRIMARY KEY (course, prerequisity),
+    FOREIGN KEY (course) REFERENCES Courses (code),
+    FOREIGN KEY (prerequisity) REFERENCES Courses (code)
+);
+
+DROP TABLE IF EXISTS ProgramMandatory CASCADE;
+CREATE TABLE ProgramMandatory (
+    program TEXT,
+    course CHAR(6),
+    PRIMARY KEY (course, program),
+    FOREIGN KEY (course) REFERENCES Courses (code),
+    FOREIGN KEY (program) REFERENCES Programs (name)
+);
+
+DROP TABLE IF EXISTS BranchMandatory CASCADE;
+CREATE TABLE BranchMandatory (
+    branch TEXT,
+    program TEXT,
+    course CHAR(6),
+    PRIMARY KEY (branch, program, course),
+    FOREIGN KEY (branch, program) REFERENCES Branches (name, program),
+    FOREIGN KEY (course) REFERENCES Courses (code)
+);
+
+DROP TABLE IF EXISTS Recommended CASCADE;
+CREATE TABLE Recommended (
+    branch TEXT,
+    program TEXT,
+    course CHAR(6),
+    PRIMARY KEY (branch, program, course),
+    FOREIGN KEY (branch, program) REFERENCES Branches (name, program),
+    FOREIGN KEY (course) REFERENCES Courses (code)
+);
+
+DROP TABLE IF EXISTS IsTaking CASCADE;
+CREATE TABLE IsTaking (
+    student INT,
+    course CHAR(6),
+    PRIMARY KEY (student, course),
+    FOREIGN KEY (student) REFERENCES Students (personNr),
+    FOREIGN KEY (course) REFERENCES Courses (code)
+);
+
+DROP TABLE IF EXISTS HasTaken CASCADE;
+CREATE TABLE HasTaken (
+    student INT,
+    course CHAR(6),
+    grade CHAR(1) NOT NULL,
+    PRIMARY KEY (student, course),
+    FOREIGN KEY (student) REFERENCES Students (personNr),
+    FOREIGN KEY (course) REFERENCES Courses (code)
+);
+
+DROP TABLE IF EXISTS WaitingFor CASCADE;
+CREATE TABLE WaitingFor (
+    student INT,
+    course CHAR(6),
+    placeInList INT NOT NULL,
+    PRIMARY KEY (student, course),
+    FOREIGN KEY (student) REFERENCES Students (personNr),
+    FOREIGN KEY (course) REFERENCES Courses (code),
+    UNIQUE (course, placeInList)
 );
