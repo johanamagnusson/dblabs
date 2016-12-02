@@ -6,7 +6,7 @@ Electronics	E
 Mathematics	M
 Chemistry	CH
 Biology	B
-Departments----------
+Programs----------
 Information Technology	IT
 Computer Science and Engineering	CSE
 Engineering Physics	EP
@@ -18,7 +18,7 @@ Mathematics Program	MP
 HostedBy---------
 Information Technology	Computer Science
 Computer Science and Engineering	Computer Science
-Computer Science and Engineering	Computer Engieering
+Computer Science and Engineering	Computer Engineering
 Engineering Physics	Physics
 Engineering Electronics	Electronics
 Engineering Chemistry	Chemistry
@@ -26,3 +26,12 @@ Engineering Chemistry with Phyiscs	Chemistry
 Engineering Chemistry with Phyiscs	Physics
 Biotechnology	Biology
 Mathematics Program	Mathematics
+Branches----------
+Complex Adaptive Systems	Engineering Physics
+Applied Physics	Engineering Physics
+Engineering Mathematics and Computational Science	Mathematics Program
+Applied Electronics	Engineering Electronics
+Applied Chemistry	Engineering Chemistry
+Biomedical Engineering	Biotechnology
+Algorithms, languages and logic	Computer Science and Engineering
+Industrial Ecology	Engineering Chemistry

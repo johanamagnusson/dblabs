@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS Students CASCADE;
 CREATE TABLE Students (
     personNr INT PRIMARY KEY,
     name TEXT NOT NULL,
-    studentID INT NOT NULL UNIQUE,
+    studentID TEXT NOT NULL UNIQUE,
     program TEXT REFERENCES Programs (name),
     UNIQUE (personNr, program)
 );

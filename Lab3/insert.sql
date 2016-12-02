@@ -15,7 +15,7 @@ INSERT INTO Programs (name, abbr) VALUES ('Biotechnology', 'BIO');
 INSERT INTO Programs (name, abbr) VALUES ('Mathematics Program', 'MP');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Information Technology', 'Computer Science');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Computer Science and Engineering', 'Computer Science');
-INSERT INTO HostedBy (programName, departmentName) VALUES ('Computer Science and Engineering', 'Computer Engieering');
+INSERT INTO HostedBy (programName, departmentName) VALUES ('Computer Science and Engineering', 'Computer Engineering');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Physics', 'Physics');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Electronics', 'Electronics');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry', 'Chemistry');
@@ -23,3 +23,11 @@ INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistr
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry with Phyiscs', 'Physics');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Biotechnology', 'Biology');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Mathematics Program', 'Mathematics');
+INSERT INTO Branches (name, program) VALUES ('Complex Adaptive Systems', 'Engineering Physics')
+INSERT INTO Branches (name, program) VALUES ('Applied Physics', 'Engineering Physics')
+INSERT INTO Branches (name, program) VALUES ('Engineering Mathematics and Computational Science', 'Mathematics Program')
+INSERT INTO Branches (name, program) VALUES ('Applied Electronics', 'Engineering Electronics')
+INSERT INTO Branches (name, program) VALUES ('Applied Chemistry', 'Engineering Chemistry')
+INSERT INTO Branches (name, program) VALUES ('Biomedical Engineering', 'Biotechnology')
+INSERT INTO Branches (name, program) VALUES ('Algorithms, languages and logic', 'Computer Science and Engineering')
+INSERT INTO Branches (name, program) VALUES ('Industrial Ecology', 'Engineering Chemistry')
