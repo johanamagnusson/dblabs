@@ -4,4 +4,7 @@ Students-------
 8702071334	Oskar Paulander	poskar	Engineering Physics
 9103299485	Victor Strand	vicsa	Engineering Chemistry
 8912247345	Tony Johansson	tojo	Mathematics Program
-
+9310304567	Aron Kerekes	arker	Computer Science and Engineering
+9002243255	Rickard Andersson	ricander	Engineering Physics
+9006104212	Malin Johansson	mano	Information Technology
+9104205293	Elin Pelin	elpe	Computer Science and Engineering 

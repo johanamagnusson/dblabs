@@ -33,11 +33,32 @@ def depProgInsert(writeFile):
         elif currentSection == 3:
             writeFile.write(branchInsertString.format(split[0], split[1]))
 
+def studentInsert(writeFile):
+
+    studentInsertString = "INSERT INTO Students (personNr, name, studentID, program) VALUES ('{0}', '{1}', '{2}', '{3}')\n"
+
+    readFile = open("students.txt")
+    lines = [line.rstrip("\n") for line in readFile]
+    readFile.close()
+    
+    for line in lines:
+        print(line)
+
+    currentSection = 0
+    for line in lines[1:]:
+        split = line.split("\t")
+        if currentSection == 0:
+            if "--" in line:
+                currentSection = 1
+            else:
+                writeFile.write(studentInsertString.format(split[0], split[1],
+                                                            split[2], split[3]))
 
 def main():
-    writeFile = open("insert.sql","w")
+    writeFile = open("insert1.sql","w")
 
     depProgInsert(writeFile)
+    studentInsert(writeFile)
 
     writeFile.close()
 

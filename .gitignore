@@ -13,3 +13,6 @@ hs_err_pid*
 
 # vim swpfiles
 *.swp
+
+# MAC-bullshit
+.DS_Store
