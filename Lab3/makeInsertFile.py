@@ -35,7 +35,8 @@ def depProgInsert(writeFile):
 
 def studentInsert(writeFile):
 
-    studentInsertString = "INSERT INTO Students (personNr, name, studentID, program) VALUES ('{0}', '{1}', '{2}', '{3}')\n"
+    studentInsertString     = "INSERT INTO Students (personNr, name, studentID, program) VALUES ('{0}', '{1}', '{2}', '{3}')\n"
+    selectedInsertString    = "INSERT INTO Selected (student, branch, program) VALUES ('{0}', '{1}', '{2}'\n)"
 
     readFile = open("students.txt")
     lines = [line.rstrip("\n") for line in readFile]
@@ -53,6 +54,13 @@ def studentInsert(writeFile):
             else:
                 writeFile.write(studentInsertString.format(split[0], split[1],
                                                             split[2], split[3]))
+        elif currentSection == 1:
+            if "--" in line:
+                currentSection = 2
+            else:
+                writeFile.write(selectedInsertString.format(split[0], split[1],
+                                                            split[2]))
+
 
 def main():
     writeFile = open("insert1.sql","w")

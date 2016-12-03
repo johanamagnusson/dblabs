@@ -94,12 +94,36 @@ INSERT INTO Courses (code, name,credits,department) VALUES ('BIO104', 'Biology 4
 INSERT INTO Courses (code, name,credits,department) VALUES ('BIO105', 'Biology 5',7.5,'Biology');
 INSERT INTO Courses (code, name,credits,department) VALUES ('BIO106', 'Biology 6',7.5,'Biology');
 
-INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CSE106',10);
-INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CEE106',10);
+INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CSE106',5);
+INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CEE106',5);
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('PHY106',10);
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('MAT106',10);
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CHE106',10);
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('BIO106',10);
+
+INSERT INTO IsTaking (student, course) VALUES ('9006104212', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('9104205293', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('9411304398', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('1119029421', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('9310304567', 'CSE106');
+
+INSERT INTO IsTaking (student, course) VALUES ('9006104212', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('9104205293', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('9411304398', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('1119029421', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('9310304567', 'CEE106');
+
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('9004103553', 'CSE106', '1');
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('9210024536', 'CSE106', '2');
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('8702071334', 'CSE106', '3');
+
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('9004103553', 'CEE106', '1');
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('9210024536', 'CEE106', '2');
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('8702071334', 'CEE106', '3');
+
+INSERT INTO Classifications (name) VALUES ('Mathematical');
+INSERT INTO Classifications (name) VALUES ('Research');
+INSERT INTO Classifications (name) VALUES ('Seminar');
 
 INSERT INTO Students (personNr, name, studentID, program) VALUES ('9004103553', 'Andreas Magnusson', 'andrmag', 'Engineering Physics')
 INSERT INTO Students (personNr, name, studentID, program) VALUES ('9210024536', 'Sebastian Karlsson', 'sebkar', 'Engineering Electronics')

@@ -39,4 +39,15 @@ INSERT INTO Students (personNr, name, studentID, program) VALUES ('8912247345', 
 INSERT INTO Students (personNr, name, studentID, program) VALUES ('9310304567', 'Aron Kerekes', 'arker', 'Computer Science and Engineering')
 INSERT INTO Students (personNr, name, studentID, program) VALUES ('9002243255', 'Rickard Andersson', 'ricander', 'Engineering Physics')
 INSERT INTO Students (personNr, name, studentID, program) VALUES ('9006104212', 'Malin Johansson', 'mano', 'Information Technology')
-INSERT INTO Students (personNr, name, studentID, program) VALUES ('9104205293', 'Elin Pelin', 'elpe', 'Computer Science and Engineering ')
+INSERT INTO Students (personNr, name, studentID, program) VALUES ('9104205293', 'Elin Pelin', 'elpe', 'Computer Science and Engineering')
+INSERT INTO Students (personNr, name, studentID, program) VALUES ('9411304398', 'Arne Hegerfors', 'arne', 'Engineering Electronics')
+INSERT INTO Students (personNr, name, studentID, program) VALUES ('1119029421', 'Nils-Petter Sundgren', 'nipsu', 'Computer Science and Engineering')
+INSERT INTO Selected (student, branch, program) VALUES ('9004103553', 'Complex Adaptive Systems', 'Engineering Physics'
+)INSERT INTO Selected (student, branch, program) VALUES ('9210024536', 'Applied Electronics', 'Engineering Electronics'
+)INSERT INTO Selected (student, branch, program) VALUES ('8702071334', 'Applied Physics', 'Engineering Physics'
+)INSERT INTO Selected (student, branch, program) VALUES ('9103299485', 'Applied Chemistry', 'Engineering Chemistry'
+)INSERT INTO Selected (student, branch, program) VALUES ('8912247345', 'Engineering Mathematics and Computational Science', 'Mathematics Program'
+)INSERT INTO Selected (student, branch, program) VALUES ('9310304567', 'Algorithms, languages and logic', 'Computer Science and Engineering'
+)INSERT INTO Selected (student, branch, program) VALUES ('9411304398', 'Embedded Systems Design', 'Engineering Electronics'
+)INSERT INTO Selected (student, branch, program) VALUES ('1119029421', 'Embedded Systems Design', 'Computer Science and Engineering'
+)

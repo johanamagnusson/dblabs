@@ -7,4 +7,15 @@ Students-------
 9310304567	Aron Kerekes	arker	Computer Science and Engineering
 9002243255	Rickard Andersson	ricander	Engineering Physics
 9006104212	Malin Johansson	mano	Information Technology
-9104205293	Elin Pelin	elpe	Computer Science and Engineering 
+9104205293	Elin Pelin	elpe	Computer Science and Engineering
+9411304398	Arne Hegerfors	arne	Engineering Electronics
+1119029421	Nils-Petter Sundgren	nipsu	Computer Science and Engineering
+Selected------
+9004103553	Complex Adaptive Systems	Engineering Physics
+9210024536	Applied Electronics	Engineering Electronics
+8702071334	Applied Physics	Engineering Physics
+9103299485	Applied Chemistry	Engineering Chemistry
+8912247345	Engineering Mathematics and Computational Science	Mathematics Program
+9310304567	Algorithms, languages and logic	Computer Science and Engineering
+9411304398	Embedded Systems Design	Engineering Electronics
+1119029421	Embedded Systems Design	Computer Science and Engineering
