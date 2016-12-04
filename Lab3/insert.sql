@@ -11,7 +11,7 @@ INSERT INTO Programs (name, abbr) VALUES ('Computer Science and Engineering', 'C
 INSERT INTO Programs (name, abbr) VALUES ('Engineering Physics', 'EP');
 INSERT INTO Programs (name, abbr) VALUES ('Engineering Electronics', 'EE');
 INSERT INTO Programs (name, abbr) VALUES ('Engineering Chemistry', 'EC');
-INSERT INTO Programs (name, abbr) VALUES ('Engineering Chemistry with Phyiscs', 'ECP');
+INSERT INTO Programs (name, abbr) VALUES ('Engineering Chemistry with Physics', 'ECP');
 INSERT INTO Programs (name, abbr) VALUES ('Biotechnology', 'BIO');
 INSERT INTO Programs (name, abbr) VALUES ('Mathematics Program', 'MP');
 
@@ -21,8 +21,8 @@ INSERT INTO HostedBy (programName, departmentName) VALUES ('Computer Science and
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Physics', 'Physics');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Electronics', 'Electronics');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry', 'Chemistry');
-INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry with Phyiscs', 'Chemistry');
-INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry with Phyiscs', 'Physics');
+INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry with Physics', 'Chemistry');
+INSERT INTO HostedBy (programName, departmentName) VALUES ('Engineering Chemistry with Physics', 'Physics');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Biotechnology', 'Biology');
 INSERT INTO HostedBy (programName, departmentName) VALUES ('Mathematics Program', 'Mathematics');
 
@@ -41,9 +41,9 @@ INSERT INTO Branches (name, program) VALUES ('Theoretical Electronics', 'Enginee
 INSERT INTO Branches (name, program) VALUES ('Applied Chemistry', 'Engineering Chemistry');
 INSERT INTO Branches (name, program) VALUES ('Complex Chemistry', 'Engineering Chemistry');
 INSERT INTO Branches (name, program) VALUES ('Theoretical Chemistry', 'Engineering Chemistry');
-INSERT INTO Branches (name, program) VALUES ('Applied Chemistry with Phyiscs', 'Engineering Chemistry with Phyiscs');
-INSERT INTO Branches (name, program) VALUES ('Complex Chemistry with Phyiscs', 'Engineering Chemistry with Phyiscs');
-INSERT INTO Branches (name, program) VALUES ('Theoretical Chemistry with Phyiscs', 'Engineering Chemistry with Phyiscs');
+INSERT INTO Branches (name, program) VALUES ('Applied Chemistry with Physics', 'Engineering Chemistry with Physics');
+INSERT INTO Branches (name, program) VALUES ('Complex Chemistry with Physics', 'Engineering Chemistry with Physics');
+INSERT INTO Branches (name, program) VALUES ('Theoretical Chemistry with Physics', 'Engineering Chemistry with Physics');
 INSERT INTO Branches (name, program) VALUES ('Applied Biotechnology', 'Biotechnology');
 INSERT INTO Branches (name, program) VALUES ('Complex Biotechnology', 'Biotechnology');
 INSERT INTO Branches (name, program) VALUES ('Theoretical Biotechnology', 'Biotechnology');
@@ -145,7 +145,7 @@ INSERT INTO Students (personNr, studentName, studentID, program) VALUES (7704103
 INSERT INTO Students (personNr, studentName, studentID, program) VALUES (7404107785, 'Sheldon Cooper', 'shecoo', 'Engineering Physics');
 INSERT INTO Students (personNr, studentName, studentID, program) VALUES (7504108998, 'Bernadette Rostenkowski-Wolowitz', 'berros', 'Biotechnology');
 INSERT INTO Students (personNr, studentName, studentID, program) VALUES (5504104455, 'Han Solo', 'hansol', 'Computer Science and Engineering');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (5911051959, 'Frank Underwood', 'FraUnd', 'Engineering Chemistry with Phyiscs');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES (5911051959, 'Frank Underwood', 'FraUnd', 'Engineering Chemistry with Physics');
 
 INSERT INTO Selected (student, branch, program) VALUES (9004103553, 'Complex Physics', 'Engineering Physics');
 INSERT INTO Selected (student, branch, program) VALUES (9210024536, 'Complex Electronics', 'Engineering Electronics');
@@ -201,7 +201,7 @@ INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Biotechno
 INSERT INTO BranchMandatory (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE102');
 
 INSERT INTO Recommended (branch, program, course) VALUES ('Complex Physics', 'Engineering Physics', 'PHY103');
-INSERT INTO Recommended (branch, program, course) VALUES ('Applied Physics',' Engineering Physics', 'PHY104');
+INSERT INTO Recommended (branch, program, course) VALUES ('Applied Physics','Engineering Physics', 'PHY104');
 INSERT INTO Recommended (branch, program, course) VALUES ('Applied Mathematics', 'Mathematics Program', 'MAT103');
 INSERT INTO Recommended (branch, program, course) VALUES ('Complex Computer Science', 'Computer Science and Engineering', 'CEE103');
 INSERT INTO Recommended (branch, program, course) VALUES ('Applied Biotechnology', 'Biotechnology', 'BIO103');
