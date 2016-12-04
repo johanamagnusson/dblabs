@@ -194,7 +194,7 @@ INSERT INTO ProgramMandatory (program, course) VALUES ('Engineering Chemistry wi
 INSERT INTO ProgramMandatory (program, course) VALUES ('Biotechnology', 'BIO101');
 
 INSERT INTO BranchMandatory (branch, program, course) VALUES ('Complex Physics', 'Engineering Physics', 'PHY102');
-INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Physics',' Engineering Physics', 'PHY102');
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Physics','Engineering Physics', 'PHY102');
 INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Mathematics', 'Mathematics Program', 'MAT102');
 INSERT INTO BranchMandatory (branch, program, course) VALUES ('Complex Computer Science', 'Computer Science and Engineering', 'CEE102');
 INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Biotechnology', 'Biotechnology', 'BIO102');
