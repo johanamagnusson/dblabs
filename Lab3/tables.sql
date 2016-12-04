@@ -87,9 +87,9 @@ DROP TABLE IF EXISTS ProgramMandatory CASCADE;
 CREATE TABLE ProgramMandatory (
     program TEXT,
     course CHAR(6),
-    PRIMARY KEY (course, program),
-    FOREIGN KEY (course) REFERENCES Courses (code),
-    FOREIGN KEY (program) REFERENCES Programs (name)
+    PRIMARY KEY (program, course),
+    FOREIGN KEY (program) REFERENCES Programs (name),
+    FOREIGN KEY (course) REFERENCES Courses (code)
 );
 
 DROP TABLE IF EXISTS BranchMandatory CASCADE;

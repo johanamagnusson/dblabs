@@ -1,5 +1,5 @@
 DROP VIEW IF EXISTS StudentsFollowing;
-CREATE OR REPLACE VIEW StudentsFollowing AS 
+CREATE OR REPLACE VIEW StudentsFollowing AS
 SELECT Students.StudentName AS "Student Name",
   Students.personNr AS "Person Number",
   Students.studentId AS "Student ID",
@@ -14,7 +14,7 @@ CREATE OR REPLACE VIEW FinishedCourses AS
 SELECT Students.studentName AS "Student Name",
   Students.personNr AS "Person Number",
   Courses.courseName AS "Course Name",
-  Courses.code AS "Course Code", 
+  Courses.code AS "Course Code",
   Courses.credits AS "Credits",
   HasTaken.grade AS "GRADE"
 FROM HasTaken
@@ -29,7 +29,7 @@ CREATE OR REPLACE VIEW PassedCourses AS
 SELECT Students.studentName AS "Student Name",
   Students.personNr AS "Person Number",
   Courses.courseName AS "Course Name",
-  Courses.code AS "Course Code", 
+  Courses.code AS "Course Code",
   Courses.credits AS "Credits",
   HasTaken.grade AS "GRADE"
 FROM HasTaken

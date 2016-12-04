@@ -94,6 +94,21 @@ INSERT INTO Courses (code, courseName,credits,department) VALUES ('BIO104', 'Bio
 INSERT INTO Courses (code, courseName,credits,department) VALUES ('BIO105', 'Biology 5',7.5,'Biology');
 INSERT INTO Courses (code, courseName,credits,department) VALUES ('BIO106', 'Biology 6',7.5,'Biology');
 
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('CSE103','CSE101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('CSE103','CSE102');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('CEE103','CEE101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('CEE103','CEE102');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('PHY103','PHY101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('PHY103','PHY102');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('ELE103','ELE101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('ELE103','ELE102');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('MAT103','MAT101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('MAT103','MAT102');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('CHE103','CHE101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('CHE103','CHE102');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('BIO103','BIO101');
+INSERT INTO HasPrerequisities (course,prerequisity) VALUES('BIO103','BIO102');
+
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CSE106',4);
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('CEE106',4);
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('PHY106',10);
@@ -135,6 +150,7 @@ INSERT INTO Students (personNr, studentName, studentID, program) VALUES (5911051
 INSERT INTO Selected (student, branch, program) VALUES (9004103553, 'Complex Physics', 'Engineering Physics');
 INSERT INTO Selected (student, branch, program) VALUES (9210024536, 'Complex Electronics', 'Engineering Electronics');
 
+
 INSERT INTO IsTaking (student, course) VALUES (9006104212, 'CSE106');
 INSERT INTO IsTaking (student, course) VALUES (9104205293, 'CSE106');
 INSERT INTO IsTaking (student, course) VALUES (8912247345, 'CSE106');
@@ -158,15 +174,6 @@ INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE104','5');
 INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE105','5');
 INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE106','5');
 
-CREATE TABLE HasTaken (
-    student BIGINT,
-    course CHAR(6),
-    grade CHAR(1) NOT NULL,
-    PRIMARY KEY (student, course),
-    FOREIGN KEY (student) REFERENCES Students (personNr),
-    FOREIGN KEY (course) REFERENCES Courses (code)
-);
-
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (9004103553, 'CSE106', 1);
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (9210024536, 'CSE106', 2);
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (8702071334, 'CSE106', 3);
@@ -175,5 +182,29 @@ INSERT INTO WaitingFor (student, course, placeInList) VALUES (9004103553, 'CEE10
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (9210024536, 'CEE106', 2);
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (8702071334, 'CEE106', 3);
 
+INSERT INTO ProgramMandatory (program, course) VALUES ('Information Technology', 'CSE101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Computer Science and Engineering', 'CSE101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Computer Science and Engineering', 'CEE101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Engineering Physics', 'PHY101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Engineering Chemistry with Physics', 'PHY101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Engineering Electronics', 'ELE101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Mathematics Program', 'MAT101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Engineering Chemistry', 'CHE101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Engineering Chemistry with Physics', 'CHE101');
+INSERT INTO ProgramMandatory (program, course) VALUES ('Biotechnology', 'BIO101');
+
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Complex Physics', 'Engineering Physics', 'PHY102');
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Physics',' Engineering Physics', 'PHY102');
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Mathematics', 'Mathematics Program', 'MAT102');
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Complex Computer Science', 'Computer Science and Engineering', 'CEE102');
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Applied Biotechnology', 'Biotechnology', 'BIO102');
+INSERT INTO BranchMandatory (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE102');
+
+INSERT INTO Recommended (branch, program, course) VALUES ('Complex Physics', 'Engineering Physics', 'PHY103');
+INSERT INTO Recommended (branch, program, course) VALUES ('Applied Physics',' Engineering Physics', 'PHY104');
+INSERT INTO Recommended (branch, program, course) VALUES ('Applied Mathematics', 'Mathematics Program', 'MAT103');
+INSERT INTO Recommended (branch, program, course) VALUES ('Complex Computer Science', 'Computer Science and Engineering', 'CEE103');
+INSERT INTO Recommended (branch, program, course) VALUES ('Applied Biotechnology', 'Biotechnology', 'BIO103');
+INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE103');
 
 
