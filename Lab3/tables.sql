@@ -29,8 +29,8 @@ CREATE TABLE Branches (
 
 DROP TABLE IF EXISTS Students CASCADE;
 CREATE TABLE Students (
-    personNr INT PRIMARY KEY,
-    name TEXT NOT NULL,
+    personNr BIGINT PRIMARY KEY,
+    studentName TEXT NOT NULL,
     studentID TEXT NOT NULL UNIQUE,
     program TEXT REFERENCES Programs (name),
     UNIQUE (personNr, program)
@@ -38,7 +38,7 @@ CREATE TABLE Students (
 
 DROP TABLE IF EXISTS Selected CASCADE;
 CREATE TABLE Selected (
-    student INT PRIMARY KEY,
+    student BIGINT PRIMARY KEY,
     branch TEXT,
     program TEXT,
     FOREIGN KEY (student, program) REFERENCES Students (personNr, program),
@@ -48,7 +48,7 @@ CREATE TABLE Selected (
 DROP TABLE IF EXISTS Courses CASCADE;
 CREATE TABLE Courses (
     code CHAR(6) PRIMARY KEY,
-    name TEXT NOT NULL,
+    courseName TEXT NOT NULL,
     credits FLOAT NOT NULL,
     department TEXT REFERENCES Departments (name)
 );
@@ -114,7 +114,7 @@ CREATE TABLE Recommended (
 
 DROP TABLE IF EXISTS IsTaking CASCADE;
 CREATE TABLE IsTaking (
-    student INT,
+    student BIGINT,
     course CHAR(6),
     PRIMARY KEY (student, course),
     FOREIGN KEY (student) REFERENCES Students (personNr),
@@ -123,7 +123,7 @@ CREATE TABLE IsTaking (
 
 DROP TABLE IF EXISTS HasTaken CASCADE;
 CREATE TABLE HasTaken (
-    student INT,
+    student BIGINT,
     course CHAR(6),
     grade CHAR(1) NOT NULL,
     PRIMARY KEY (student, course),
@@ -133,7 +133,7 @@ CREATE TABLE HasTaken (
 
 DROP TABLE IF EXISTS WaitingFor CASCADE;
 CREATE TABLE WaitingFor (
-    student INT,
+    student BIGINT,
     course CHAR(6),
     placeInList INT NOT NULL,
     PRIMARY KEY (student, course),
