@@ -41,19 +41,26 @@ WHERE HasTaken.grade = '3' OR HasTaken.grade = '4' OR HasTaken.grade = '5';
 
 DROP VIEW IF EXISTS UnreadMandatory;
 CREATE OR REPLACE VIEW UnreadMandatory AS
-SELECT Students.personnr, Students.studentname, ProgramMandatory.course AS "CPM"--,BranchMandatory.course AS "CPM"--,HasTaken.grade--
+SELECT unreadMandatoryProgram.personnr, unreadMandatoryProgram.studentname, unreadMandatoryProgram.course AS "course"
+FROM
+( 
+SELECT Students.personnr AS "personnr", Students.studentname AS "studentname", ProgramMandatory.course AS "course"
 FROM Students 
 JOIN ProgramMandatory
   ON ProgramMandatory.program = Students.program
---FULL JOIN Selected
---  ON Students.personNr = Selected.student
---FULL JOIN BranchMandatory
---  ON BranchMandatory.branch = Selected.branch
-FULL JOIN HasTaken
- ON Students.personNr = HasTaken.student AND HasTaken.course = ProgramMandatory.course
-WHERE grade IS NULL
-
-
+) AS unreadMandatoryProgram
+UNION ALL
+SELECT unreadMandatoryBranch.personnr, unreadMandatoryBranch.studentname, unreadMandatoryBranch.course AS "course"
+FROM
+(
+SELECT Students.personnr AS "personnr", Students.studentname AS "studentname", BranchMandatory.course AS "course"--,HasTaken.grade--
+FROM Students 
+JOIN Selected
+  ON Students.personNr = Selected.student
+JOIN BranchMandatory
+  ON BranchMandatory.branch = Selected.branch
+) AS unreadMandatoryBranch
+EXCEPT SELECT personNr,studentName,code AS course FROM PassedCourses
 
 DROP VIEW IF EXISTS Registrations;
 CREATE OR REPLACE VIEW Registrations AS
