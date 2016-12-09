@@ -93,7 +93,16 @@ totalCredits.sumcredits as "Total credits",
 numUnreadMandatory.coursecount as "Mandatory courses left",
 mathCredits.sumcredits as "Mathematical credits",
 researchCredits.sumcredits as "Research credits",
-numSeminar.coursecount as "Number of seminar"
+numSeminar.coursecount as "Number of seminar",
+CASE
+    WHEN mathCredits.sumcredits >= 20 AND
+        researchCredits.sumcredits >= 10 AND
+        numSeminar.coursecount >= 1 AND
+        numUnreadMandatory.coursecount IS NULL AND
+        recommendedCredits.sumcredits >= 10
+    THEN 'Yes'
+    ELSE 'No'
+END AS "Can graduate"
 FROM Students
 LEFT JOIN
 (
@@ -154,6 +163,18 @@ LEFT JOIN
     GROUP BY personNr, studentName
 ) AS numSeminar
 ON Students.personNr = numSeminar.personNr
+LEFT JOIN
+(
+    SELECT
+    personNr as "personnr",
+    studentName as "studentname",
+    SUM(credits) as "sumcredits"
+    FROM PassedCourses
+    JOIN Recommended
+    ON PassedCourses.code = Recommended.course
+    GROUP BY personNr, studentName
+) AS recommendedCredits
+ON Students.personNr = researchCredits.personNr
 ORDER BY Students.studentName
 ;
 
