@@ -361,6 +361,10 @@ INSERT INTO Recommended (branch, program, course) VALUES ('Applied Biotechnology
 INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE103');
 INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE104');
 
+INSERT INTO LimitedCourses (code, maxStudents) VALUES ('MAT102',3);
+INSERT INTO IsTaking (student, course) VALUES (9006104212, 'MAT102');
+INSERT INTO IsTaking (student, course) VALUES (9104205293, 'MAT102');
+
 DROP VIEW IF EXISTS StudentsFollowing;
 CREATE OR REPLACE VIEW StudentsFollowing AS 
 SELECT Students.StudentName AS "Student Name",
