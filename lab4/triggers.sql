@@ -1,31 +1,29 @@
 CREATE OR REPLACE FUNCTION insertRegistration() RETURNS
 TRIGGER AS $$
+DECLARE numStudents INT;
+DECLARE maxNumStudents INT;
+DECLARE newPlaceInList INT;
 BEGIN
-    IF EXISTS (SELECT 1 FROM LimitedCourses WHERE LimitedCourses.code = NEW.code) THEN
-        (
-            SELECT COUNT(student) as "countstudent"
-            FROM IsTaking
-            WHERE IsTaking.course = NEW.code
-        ) AS numStudents
-        (
-            SELECT maxStudents as "max"
-            FROM LimitedCourses
-            WHERE LimitedCourses.code = NEW.code
-        ) as limitedCourse
-        IF numStudents.countstudent < limitedCourse.max THEN
+    IF EXISTS (SELECT 1 FROM LimitedCourses WHERE
+                LimitedCourses.code = NEW.code) THEN
+        numStudents := COUNT(student)
+        FROM IsTaking
+        WHERE IsTaking.course = NEW.code;
+        maxNumStudents := maxStudents
+        FROM LimitedCourses
+        WHERE LimitedCourses.code = NEW.code;
+        IF numStudents < maxNumStudents THEN
             INSERT INTO IsTaking (student, course) VALUES (NEW.personnr, NEW.code);
         ELSE
-            (
-                SELECT MAX(placeInList) as maxplaceinlist
-                FROM WaitingFor
-                WHERE WaitingFor.course = NEW.code
-            ) AS whereInList
+            newPlaceInList :=  MAX(placeInList) + 1
+            FROM WaitingFor
+            WHERE WaitingFor.course = NEW.code;
             INSERT INTO WaitingFor (student, course, placeInList) VALUES
-            (NEW.personnr, NEW.code, whereInList.maxplaceinlist + 1);
-        END IF
+            (NEW.personnr, NEW.code, newPlaceInList);
+        END IF;
     ELSE
         INSERT INTO IsTaking (student, course) VALUES (NEW.personnr, NEW.code);
-    END IF
+    END IF;
 
     RETURN NEW;
 END
