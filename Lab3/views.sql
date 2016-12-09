@@ -66,10 +66,9 @@ ORDER BY studentName
 
 DROP VIEW IF EXISTS Registrations;
 CREATE OR REPLACE VIEW Registrations AS
-SELECT DISTINCT Courses.courseName AS "Course Name",
-    Courses.code AS "Course Code",
-    Students.studentName AS "Student Name",
-    Students.personNr AS "Person Number",
+SELECT DISTINCT
+    Courses.code AS "code",
+    Students.personNr AS "personnr",
     CASE
         WHEN EXISTS (SELECT * FROM IsTaking WHERE student = Students.personNr)
         THEN 'registered'
