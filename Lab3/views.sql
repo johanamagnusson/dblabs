@@ -61,6 +61,8 @@ JOIN BranchMandatory
   ON BranchMandatory.branch = Selected.branch
 ) AS unreadMandatoryBranch
 EXCEPT SELECT personNr,studentName,code AS course FROM PassedCourses
+ORDER BY studentName
+;
 
 DROP VIEW IF EXISTS Registrations;
 CREATE OR REPLACE VIEW Registrations AS
@@ -82,4 +84,76 @@ WHERE (Courses.code = IsTaking.course
 ORDER BY "Waiting Status"
 ;
 
+DROP VIEW IF EXISTS PathToGraduation;
+CREATE OR REPLACE VIEW PathToGraduation AS
+SELECT
+Students.personNr as "Person number",
+Students.studentName as "Name",
+totalCredits.sumcredits as "Total credits",
+numUnreadMandatory.coursecount as "Mandatory courses left",
+mathCredits.sumcredits as "Mathematical credits",
+researchCredits.sumcredits as "Research credits",
+numSeminar.coursecount as "Number of seminar"
+FROM Students
+LEFT JOIN
+(
+    SELECT
+    personNr as "personnr",
+    studentName as "studentname",
+    SUM(credits) as "sumcredits"
+    FROM PassedCourses
+    GROUP BY personNr, studentName
+) AS totalCredits
+ON Students.personNr = totalCredits.personnr
+LEFT JOIN
+(
+    SELECT
+    personNr as "personnr",
+    studentName as "studentname",
+    COUNT(course) as "coursecount"
+    FROM UnreadMandatory
+    GROUP BY personNr, studentName
+) AS numUnreadMandatory
+ON Students.personNr = numUnreadMandatory.personNr
+LEFT JOIN
+(
+    SELECT
+    personNr as "personnr",
+    studentName as "studentname",
+    SUM(credits) as "sumcredits"
+    FROM PassedCourses
+    JOIN ClassifiedBy
+    ON PassedCourses.code = ClassifiedBy.course
+    WHERE ClassifiedBy.classification = 'Mathematical'
+    GROUP BY personNr, studentName
+) AS mathCredits
+ON Students.personNr = mathCredits.personNr
+LEFT JOIN
+(
+    SELECT
+    personNr as "personnr",
+    studentName as "studentname",
+    SUM(credits) as "sumcredits"
+    FROM PassedCourses
+    JOIN ClassifiedBy
+    ON PassedCourses.code = ClassifiedBy.course
+    WHERE ClassifiedBy.classification = 'Research'
+    GROUP BY personNr, studentName
+) AS researchCredits
+ON Students.personNr = researchCredits.personNr
+LEFT JOIN
+(
+    SELECT
+    personNr as "personnr",
+    studentName as "studentname",
+    COUNT(course) as "coursecount"
+    FROM PassedCourses
+    JOIN ClassifiedBy
+    ON PassedCourses.code = ClassifiedBy.course
+    WHERE ClassifiedBy.classification = 'Seminar'
+    GROUP BY personNr, studentName
+) AS numSeminar
+ON Students.personNr = numSeminar.personNr
+ORDER BY Students.studentName
+;
 
