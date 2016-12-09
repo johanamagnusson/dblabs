@@ -126,10 +126,11 @@ CREATE TABLE HasTaken (
     student BIGINT,
     course CHAR(6),
     grade CHAR(1) NOT NULL,
+    CHECK(grade='3' OR grade='4' OR grade='5' OR grade='U'),
     PRIMARY KEY (student, course),
     FOREIGN KEY (student) REFERENCES Students (personNr),
     FOREIGN KEY (course) REFERENCES Courses (code)
-);
+  );
 
 DROP TABLE IF EXISTS WaitingFor CASCADE;
 CREATE TABLE WaitingFor (
