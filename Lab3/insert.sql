@@ -129,6 +129,10 @@ INSERT INTO ClassifiedBy (course,classification) VALUES ('BIO101', 'Mathematical
 INSERT INTO ClassifiedBy (course,classification) VALUES ('BIO101', 'Research');
 INSERT INTO ClassifiedBy (course,classification) VALUES ('BIO101', 'Seminar');
 INSERT INTO ClassifiedBy (course,classification) VALUES ('CSE106', 'Seminar');
+INSERT INTO ClassifiedBy (course,classification) VALUES ('CHE105', 'Research');
+INSERT INTO ClassifiedBy (course,classification) VALUES ('CHE106', 'Research');
+INSERT INTO ClassifiedBy (course,classification) VALUES ('MAT102', 'Mathematical');
+INSERT INTO ClassifiedBy (course,classification) VALUES ('MAT103', 'Mathematical');
 
 INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9004103553, 'Andreas Magnusson', 'andrmag', 'Engineering Physics');
 INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9210024536, 'Sebastian Karlsson', 'sebkar', 'Engineering Electronics');
@@ -173,6 +177,11 @@ INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE103','5');
 INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE104','5');
 INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE105','5');
 INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE106','5');
+INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'PHY101','4');
+INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'MAT101','3');
+INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'MAT102','4');
+INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'MAT103','5');
+
 
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (9004103553, 'CSE106', 1);
 INSERT INTO WaitingFor (student, course, placeInList) VALUES (9210024536, 'CSE106', 2);
@@ -206,5 +215,5 @@ INSERT INTO Recommended (branch, program, course) VALUES ('Applied Mathematics',
 INSERT INTO Recommended (branch, program, course) VALUES ('Complex Computer Science', 'Computer Science and Engineering', 'CEE103');
 INSERT INTO Recommended (branch, program, course) VALUES ('Applied Biotechnology', 'Biotechnology', 'BIO103');
 INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE103');
-
+INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry', 'Engineering Chemistry', 'CHE104');
 
