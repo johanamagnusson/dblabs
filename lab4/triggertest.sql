@@ -11,7 +11,7 @@ INSERT INTO Registrations (code, personnr) VALUES ('MAT102', 8702071334);
 SELECT * FROM Registrations
 WHERE code = 'MAT102';
 
--- TEST 2
+-- Tests for trigger handle_delete_registration --
 INSERT INTO Registrations (code, personnr) VALUES ('MAT102', 7404107785);
 DELETE FROM Registrations WHERE code = 'MAT102' AND personnr = 9210024536;
 

@@ -139,7 +139,7 @@ CREATE TABLE WaitingFor (
     placeInList INT NOT NULL,
     PRIMARY KEY (student, course),
     FOREIGN KEY (student) REFERENCES Students (personNr),
-    FOREIGN KEY (course) REFERENCES Courses (code),
+    FOREIGN KEY (course) REFERENCES LimitedCourses (code),
     UNIQUE (course, placeInList)
 );
 INSERT INTO Departments (name, abbr) VALUES ('Computer Science', 'CS');
