@@ -367,8 +367,10 @@ INSERT INTO IsTaking (student, course) VALUES (9006104212, 'MAT102');
 INSERT INTO IsTaking (student, course) VALUES (9104205293, 'MAT102');
 INSERT INTO HasTaken (student, course, grade) VALUES (9004103553, 'MAT101', '5');
 INSERT INTO HasTaken (student, course, grade) VALUES (9210024536, 'MAT101', '5');
+INSERT INTO HasTaken (student, course, grade) VALUES (7404107785, 'MAT101', '5');
 
 INSERT INTO HasPrerequisities (course, prerequisity) VALUES ('MAT102', 'MAT101');
+
 ----------------------------
 
 DROP VIEW IF EXISTS StudentsFollowing;

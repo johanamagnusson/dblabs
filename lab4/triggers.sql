@@ -52,10 +52,16 @@ INSTEAD OF INSERT ON Registrations
 FOR EACH ROW
 EXECUTE PROCEDURE insertRegistration();
 
+-- ----------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION deleteRegistration() RETURNS
 TRIGGER AS $$
 DECLARE waitingStatus TEXT;
+DECLARE newStudentPersonNr BIGINT;
+DECLARE placeInQueue INT;
+DECLARE numStudents INT;
+DECLARE maxNumStudents INT;
+
 BEGIN
     IF EXISTS (SELECT 1 FROM Registrations WHERE
         Registrations.personnr = OLD.personnr) THEN
@@ -64,7 +70,32 @@ BEGIN
         WHERE Registrations.personnr = OLD.personnr AND
             Registrations.code = OLD.code;
         IF waitingStatus = 'waiting' THEN
-            RAISE NOTICE 'WAITING';
+			placeInQueue := (SELECT placeInList 
+			FROM WaitingFor
+			WHERE student = OLD.personnr AND course = OLD.code); 
+			DELETE FROM WaitingFor WHERE student = OLD.personnr AND course = OLD.code;
+			UPDATE WaitingFor SET placeInList = placeInList-1
+			WHERE placeInList > placeInQueue AND course = OLD.code;
+		ELSIF waitingStatus = 'registered' THEN
+			DELETE FROM IsTaking WHERE student = OLD.personnr AND course = OLD.code;
+			IF EXISTS (SELECT 1 FROM WaitingFor WHERE
+                    WaitingFor.course = OLD.code) THEN
+		        numStudents := COUNT(student)
+                FROM IsTaking
+                WHERE IsTaking.course = OLD.code;
+                maxNumStudents := maxStudents
+                FROM LimitedCourses
+                WHERE LimitedCourses.code = OLD.code;
+			    IF numStudents < maxNumStudents THEN
+					newStudentPersonNr = student 
+					FROM WaitingFor
+					WHERE course = OLD.code AND placeInList = 1;
+					DELETE FROM WaitingFor WHERE student = newStudentPersonNr AND course = OLD.code;
+					INSERT INTO IsTaking (student, course) VALUES (newStudentPersonNr, OLD.code);
+					UPDATE WaitingFor SET placeInList = placeInList-1
+					WHERE placeInList > 1 AND course = OLD.code;
+				END IF;
+			END IF;
         END IF;
     ELSE
         RAISE EXCEPTION 'Student not registered or waiting';

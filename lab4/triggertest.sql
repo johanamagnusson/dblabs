@@ -11,3 +11,18 @@ INSERT INTO Registrations (code, personnr) VALUES ('MAT102', 8702071334);
 SELECT * FROM Registrations
 WHERE code = 'MAT102';
 
+-- TEST 2
+INSERT INTO Registrations (code, personnr) VALUES ('MAT102', 7404107785);
+DELETE FROM Registrations WHERE code = 'MAT102' AND personnr = 9210024536;
+
+SELECT * FROM Registrations
+WHERE code = 'MAT102';
+
+INSERT INTO IsTaking (student, course) VALUES (4404103553, 'MAT102'); -- Force add to full course
+INSERT INTO Registrations (code, personnr) VALUES ('MAT102', 9210024536);
+DELETE FROM Registrations WHERE code = 'MAT102' AND personnr = 9004103553;
+DELETE FROM Registrations WHERE code = 'MAT102' AND personnr = 4404103553;
+
+SELECT * FROM Registrations
+WHERE code = 'MAT102';
+
