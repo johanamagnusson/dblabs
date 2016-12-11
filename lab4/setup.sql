@@ -29,7 +29,7 @@ CREATE TABLE Branches (
 
 DROP TABLE IF EXISTS Students CASCADE;
 CREATE TABLE Students (
-    personNr BIGINT PRIMARY KEY,
+    personNr CHAR(11) PRIMARY KEY,
     studentName TEXT NOT NULL,
     studentID TEXT NOT NULL UNIQUE,
     program TEXT REFERENCES Programs (name),
@@ -38,7 +38,7 @@ CREATE TABLE Students (
 
 DROP TABLE IF EXISTS Selected CASCADE;
 CREATE TABLE Selected (
-    student BIGINT PRIMARY KEY,
+    student CHAR(11) PRIMARY KEY,
     branch TEXT,
     program TEXT,
     FOREIGN KEY (student, program) REFERENCES Students (personNr, program),
@@ -114,7 +114,7 @@ CREATE TABLE Recommended (
 
 DROP TABLE IF EXISTS IsTaking CASCADE;
 CREATE TABLE IsTaking (
-    student BIGINT,
+    student CHAR(11),
     course CHAR(6),
     PRIMARY KEY (student, course),
     FOREIGN KEY (student) REFERENCES Students (personNr),
@@ -123,7 +123,7 @@ CREATE TABLE IsTaking (
 
 DROP TABLE IF EXISTS HasTaken CASCADE;
 CREATE TABLE HasTaken (
-    student BIGINT,
+    student CHAR(11),
     course CHAR(6),
     grade CHAR(1) NOT NULL,
     CHECK(grade='3' OR grade='4' OR grade='5' OR grade='U'),
@@ -134,7 +134,7 @@ CREATE TABLE HasTaken (
 
 DROP TABLE IF EXISTS WaitingFor CASCADE;
 CREATE TABLE WaitingFor (
-    student BIGINT,
+    student CHAR(11),
     course CHAR(6),
     placeInList INT NOT NULL,
     PRIMARY KEY (student, course),
@@ -278,62 +278,61 @@ INSERT INTO ClassifiedBy (course,classification) VALUES ('CHE106', 'Research');
 INSERT INTO ClassifiedBy (course,classification) VALUES ('MAT102', 'Mathematical');
 INSERT INTO ClassifiedBy (course,classification) VALUES ('MAT103', 'Mathematical');
 
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9004103553, 'Andreas Magnusson', 'andrmag', 'Engineering Physics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9210024536, 'Sebastian Karlsson', 'sebkar', 'Engineering Electronics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (8702071334, 'Oskar Paulander', 'poskar', 'Engineering Physics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9103299485, 'Victor Strand', 'vicsa', 'Engineering Chemistry');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (8912247345, 'Tony Johansson', 'tojo', 'Mathematics Program');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9310304567, 'Aron Kerekes', 'arker', 'Computer Science and Engineering');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9002243255, 'Rickard Andersson', 'ricander', 'Engineering Physics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9006104212, 'Malin Johansson', 'mano', 'Information Technology');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (9104205293, 'Elin Pelin', 'elpe', 'Computer Science and Engineering');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (6101011337, 'Walter White', 'ww', 'Engineering Chemistry');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (4404103553, 'Emmett Brown', 'ebrown', 'Engineering Physics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (7704103553, 'Leonard Hofstadter', 'lhof', 'Engineering Physics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (7404107785, 'Sheldon Cooper', 'shecoo', 'Engineering Physics');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (7504108998, 'Bernadette Rostenkowski-Wolowitz', 'berros', 'Biotechnology');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (5504104455, 'Han Solo', 'hansol', 'Computer Science and Engineering');
-INSERT INTO Students (personNr, studentName, studentID, program) VALUES (5911051959, 'Frank Underwood', 'FraUnd', 'Engineering Chemistry with Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('900410-3553', 'Andreas Magnusson', 'andrmag', 'Engineering Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('921002-4536', 'Sebastian Karlsson', 'sebkar', 'Engineering Electronics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('870207-1334', 'Oskar Paulander', 'poskar', 'Engineering Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('910329-9485', 'Victor Strand', 'vicsa', 'Engineering Chemistry');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('891224-7345', 'Tony Johansson', 'tojo', 'Mathematics Program');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('931030-4567', 'Aron Kerekes', 'arker', 'Computer Science and Engineering');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('900224-3255', 'Rickard Andersson', 'ricander', 'Engineering Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('900610-4212', 'Malin Johansson', 'mano', 'Information Technology');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('910420-5293', 'Elin Pelin', 'elpe', 'Computer Science and Engineering');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('610101-1337', 'Walter White', 'ww', 'Engineering Chemistry');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('440410-3553', 'Emmett Brown', 'ebrown', 'Engineering Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('770410-3553', 'Leonard Hofstadter', 'lhof', 'Engineering Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('740410-7785', 'Sheldon Cooper', 'shecoo', 'Engineering Physics');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('7504108-998', 'Bernadette Rostenkowski-Wolowitz', 'berros', 'Biotechnology');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('550410-4455', 'Han Solo', 'hansol', 'Computer Science and Engineering');
+INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('591105-1959', 'Frank Underwood', 'FraUnd', 'Engineering Chemistry with Physics');
 
-INSERT INTO Selected (student, branch, program) VALUES (9004103553, 'Complex Physics', 'Engineering Physics');
-INSERT INTO Selected (student, branch, program) VALUES (9210024536, 'Complex Electronics', 'Engineering Electronics');
-
-
-INSERT INTO IsTaking (student, course) VALUES (9006104212, 'CSE106');
-INSERT INTO IsTaking (student, course) VALUES (9104205293, 'CSE106');
-INSERT INTO IsTaking (student, course) VALUES (8912247345, 'CSE106');
-INSERT INTO IsTaking (student, course) VALUES (9310304567, 'CSE106');
-
-INSERT INTO IsTaking (student, course) VALUES (9006104212, 'CEE106');
-INSERT INTO IsTaking (student, course) VALUES (9104205293, 'CEE106');
-INSERT INTO IsTaking (student, course) VALUES (8912247345, 'CEE106');
-INSERT INTO IsTaking (student, course) VALUES (9310304567, 'CEE106');
-
-INSERT INTO HasTaken (student, course,grade) VALUES (9004103553, 'CEE101','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (9210024536, 'CEE101','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (9210024536, 'CEE102','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (9002243255, 'CEE101','U');
-INSERT INTO HasTaken (student, course,grade) VALUES (9002243255, 'MAT101','3');
-INSERT INTO HasTaken (student, course,grade) VALUES (9104205293, 'MAT105','4');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE101','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE102','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE103','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE104','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE105','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'CHE106','5');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'PHY101','4');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'MAT101','3');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'MAT102','4');
-INSERT INTO HasTaken (student, course,grade) VALUES (6101011337, 'MAT103','5');
+INSERT INTO Selected (student, branch, program) VALUES ('900410-3553', 'Complex Physics', 'Engineering Physics');
+INSERT INTO Selected (student, branch, program) VALUES ('921002-4536', 'Complex Electronics', 'Engineering Electronics');
 
 
-INSERT INTO WaitingFor (student, course, placeInList) VALUES (9004103553, 'CSE106', 1);
-INSERT INTO WaitingFor (student, course, placeInList) VALUES (9210024536, 'CSE106', 2);
-INSERT INTO WaitingFor (student, course, placeInList) VALUES (8702071334, 'CSE106', 3);
+INSERT INTO IsTaking (student, course) VALUES ('900610-4212', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('910420-5293', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('891224-7345', 'CSE106');
+INSERT INTO IsTaking (student, course) VALUES ('931030-4567', 'CSE106');
 
-INSERT INTO WaitingFor (student, course, placeInList) VALUES (9004103553, 'CEE106', 1);
-INSERT INTO WaitingFor (student, course, placeInList) VALUES (9210024536, 'CEE106', 2);
-INSERT INTO WaitingFor (student, course, placeInList) VALUES (8702071334, 'CEE106', 3);
+INSERT INTO IsTaking (student, course) VALUES ('900610-4212', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('910420-5293', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('891224-7345', 'CEE106');
+INSERT INTO IsTaking (student, course) VALUES ('931030-4567', 'CEE106');
+
+INSERT INTO HasTaken (student, course,grade) VALUES ('900410-3553', 'CEE101','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('921002-4536', 'CEE101','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('921002-4536', 'CEE102','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('900224-3255', 'CEE101','U');
+INSERT INTO HasTaken (student, course,grade) VALUES ('900224-3255', 'MAT101','3');
+INSERT INTO HasTaken (student, course,grade) VALUES ('910420-5293', 'MAT105','4');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'CHE101','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'CHE102','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'CHE103','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'CHE104','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'CHE105','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'CHE106','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'PHY101','4');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'MAT101','3');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'MAT102','4');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'MAT103','5');
+
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('900410-3553', 'CSE106', 1);
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('921002-4536', 'CSE106', 2);
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('870207-1334', 'CSE106', 3);
+
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('900410-3553', 'CEE106', 1);
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('921002-4536', 'CEE106', 2);
+INSERT INTO WaitingFor (student, course, placeInList) VALUES ('870207-1334', 'CEE106', 3);
 
 INSERT INTO ProgramMandatory (program, course) VALUES ('Information Technology', 'CSE101');
 INSERT INTO ProgramMandatory (program, course) VALUES ('Computer Science and Engineering', 'CSE101');
@@ -363,11 +362,11 @@ INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry
 
 -- DATA FOR TRIGGER TESTS --
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('MAT102',3);
-INSERT INTO IsTaking (student, course) VALUES (9006104212, 'MAT102');
-INSERT INTO IsTaking (student, course) VALUES (9104205293, 'MAT102');
-INSERT INTO HasTaken (student, course, grade) VALUES (9004103553, 'MAT101', '5');
-INSERT INTO HasTaken (student, course, grade) VALUES (9210024536, 'MAT101', '5');
-INSERT INTO HasTaken (student, course, grade) VALUES (7404107785, 'MAT101', '5');
+INSERT INTO IsTaking (student, course) VALUES ('900610-4212', 'MAT102');
+INSERT INTO IsTaking (student, course) VALUES ('910420-5293', 'MAT102');
+INSERT INTO HasTaken (student, course, grade) VALUES ('900410-3553', 'MAT101', '5');
+INSERT INTO HasTaken (student, course, grade) VALUES ('921002-4536', 'MAT101', '5');
+INSERT INTO HasTaken (student, course, grade) VALUES ('740410-7785', 'MAT101', '5');
 
 INSERT INTO HasPrerequisities (course, prerequisity) VALUES ('MAT102', 'MAT101');
 
