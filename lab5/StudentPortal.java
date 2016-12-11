@@ -14,8 +14,8 @@ import java.io.*;  // Reading user input.
 public class StudentPortal
 {
     /* TODO Here you should put your database name, username and password */
-    static final String USERNAME = "";
-    static final String PASSWORD = "";
+    static final String USERNAME = "tda357_014";
+    static final String PASSWORD = "cetac";
 
     /* Print command usage.
      * /!\ you don't need to change this function! */
@@ -42,7 +42,8 @@ public class StudentPortal
             String student = args[0]; // This is the identifier for the student.
 
             Console console = System.console();
-	    // In Eclipse. System.console() returns null due to a bug (https://bugs.eclipse.org/bugs/show_bug.cgi?id=122429)
+	    // In Eclipse. System.console() returns null due to a bug 
+        // (https://bugs.eclipse.org/bugs/show_bug.cgi?id=122429)
 	    // In that case, use the following line instead:
 	    // BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
             usage();
@@ -85,6 +86,20 @@ public class StudentPortal
     static void getInformation(Connection conn, String student) throws SQLException
     {
         // TODO: Your implementation here
+        PreparedStatement getInfo = conn.prepareStatement
+            ("SELECT * FROM PassedCourses WHERE PassedCourses.personnr = ?" );
+        getInfo.setString(1, student);
+        ResultSet rs = getInfo.executeQuery();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columns = rsmd.getColumnCount();
+        while (rs.next()) {
+            for (int i = 1; i <= columns; i++) {
+                if (i > 1) System.out.print(",  ");
+                String columnValue = rs.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+        System.out.println("");
+        }
     }
 
     /* Register: Given a student id number and a course code, this function
