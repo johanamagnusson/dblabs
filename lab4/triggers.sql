@@ -57,7 +57,7 @@ EXECUTE PROCEDURE insertRegistration();
 CREATE OR REPLACE FUNCTION deleteRegistration() RETURNS
 TRIGGER AS $$
 DECLARE waitingStatus TEXT;
-DECLARE newStudentPersonNr BIGINT;
+DECLARE newStudentPersonNr CHAR(11);
 DECLARE placeInQueue INT;
 DECLARE numStudents INT;
 DECLARE maxNumStudents INT;

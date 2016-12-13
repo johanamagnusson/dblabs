@@ -88,22 +88,6 @@ public class StudentPortal
      */
     static void getInformation(Connection conn, String student) throws SQLException
     {
-        // TODO: Your implementation here
-        //PreparedStatement getInfo = conn.prepareStatement
-        //    ("SELECT * FROM PassedCourses WHERE PassedCourses.personnr = ?" );
-        //getInfo.setString(1, student);
-        //ResultSet rs = getInfo.executeQuery();
-        //ResultSetMetaData rsmd = rs.getMetaData();
-        //int columns = rsmd.getColumnCount();
-        //while (rs.next()) {
-        //    for (int i = 1; i <= columns; i++) {
-        //        if (i > 1) System.out.print(",  ");
-        //        String columnValue = rs.getString(i);
-        //        System.out.print(columnValue + " " + rsmd.getColumnName(i));
-        //    }
-        //System.out.println("");
-        //}
-        
         PreparedStatement following = conn.prepareStatement
             ("SELECT * FROM StudentsFollowing WHERE StudentsFollowing.\"Person Number\" = ?");
         following.setString(1, student);
@@ -159,7 +143,6 @@ public class StudentPortal
             } else {
                 System.out.println("");
             }
-
         }
         System.out.println("");
         System.out.println("Seminar courses taken: " + rsGradPath.getInt("Number of Seminar"));
@@ -179,6 +162,23 @@ public class StudentPortal
     throws SQLException
     {
         // TODO: Your implementation here
+        PreparedStatement register = conn.prepareStatement
+            ("INSERT INTO Registrations (code, personnr) VALUES (?, ?)");
+        register.setString(1, course);
+        register.setString(2, student);
+
+        try {
+            register.executeUpdate();
+        } catch (SQLException se) {
+            String SQLState = se.getSQLState();
+            if (SQLState.equals("23505")) {
+                System.out.println("Student already ");
+            }
+            System.out.println(se.getSQLState() + se);
+        }
+
+
+
     }
 
     /* Unregister: Given a student id number and a course code, this function
