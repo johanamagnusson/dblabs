@@ -297,6 +297,7 @@ INSERT INTO Students (personNr, studentName, studentID, program) VALUES ('591105
 
 INSERT INTO Selected (student, branch, program) VALUES ('900410-3553', 'Complex Physics', 'Engineering Physics');
 INSERT INTO Selected (student, branch, program) VALUES ('921002-4536', 'Complex Electronics', 'Engineering Electronics');
+INSERT INTO Selected (student, branch, program) VALUES ('610101-1337', 'Theoretical Chemistry', 'Engineering Chemistry');
 
 
 INSERT INTO IsTaking (student, course) VALUES ('900610-4212', 'CSE106');
@@ -325,6 +326,7 @@ INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'PHY101','4'
 INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'MAT101','3');
 INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'MAT102','4');
 INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'MAT103','5');
+INSERT INTO HasTaken (student, course,grade) VALUES ('610101-1337', 'BIO101','5');
 
 INSERT INTO WaitingFor (student, course, placeInList) VALUES ('900410-3553', 'CSE106', 1);
 INSERT INTO WaitingFor (student, course, placeInList) VALUES ('921002-4536', 'CSE106', 2);
