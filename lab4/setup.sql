@@ -444,6 +444,7 @@ DROP VIEW IF EXISTS Registrations;
 CREATE OR REPLACE VIEW Registrations AS
 SELECT DISTINCT
     Courses.code AS "code",
+    Courses.coursename AS "name",
     Students.personNr AS "personnr",
     CASE
         WHEN EXISTS (SELECT * FROM IsTaking WHERE student = Students.personNr)

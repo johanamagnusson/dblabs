@@ -9,7 +9,9 @@
 import java.sql.*; // JDBC stuff.
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.*;
 import java.io.*;  // Reading user input.
+
 
 public class StudentPortal
 {
@@ -31,6 +33,7 @@ public class StudentPortal
      * /!\ You don't need to change this function! */
     public static void main(String[] args) throws Exception
     {
+        Locale.setDefault(Locale.US);
         try {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://ate.ita.chalmers.se/";
@@ -86,20 +89,87 @@ public class StudentPortal
     static void getInformation(Connection conn, String student) throws SQLException
     {
         // TODO: Your implementation here
-        PreparedStatement getInfo = conn.prepareStatement
-            ("SELECT * FROM PassedCourses WHERE PassedCourses.personnr = ?" );
-        getInfo.setString(1, student);
-        ResultSet rs = getInfo.executeQuery();
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int columns = rsmd.getColumnCount();
-        while (rs.next()) {
-            for (int i = 1; i <= columns; i++) {
-                if (i > 1) System.out.print(",  ");
-                String columnValue = rs.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
+        //PreparedStatement getInfo = conn.prepareStatement
+        //    ("SELECT * FROM PassedCourses WHERE PassedCourses.personnr = ?" );
+        //getInfo.setString(1, student);
+        //ResultSet rs = getInfo.executeQuery();
+        //ResultSetMetaData rsmd = rs.getMetaData();
+        //int columns = rsmd.getColumnCount();
+        //while (rs.next()) {
+        //    for (int i = 1; i <= columns; i++) {
+        //        if (i > 1) System.out.print(",  ");
+        //        String columnValue = rs.getString(i);
+        //        System.out.print(columnValue + " " + rsmd.getColumnName(i));
+        //    }
+        //System.out.println("");
+        //}
+        
+        PreparedStatement following = conn.prepareStatement
+            ("SELECT * FROM StudentsFollowing WHERE StudentsFollowing.\"Person Number\" = ?");
+        following.setString(1, student);
+        
+        PreparedStatement courses = conn.prepareStatement
+            ("SELECT * FROM FinishedCourses WHERE FinishedCourses.\"Person Number\" = ?");
+        courses.setString(1, student);
+
+        PreparedStatement registrations = conn.prepareStatement
+            ("SELECT code, name, personnr, \"Waiting Status\", placeinlist FROM " + 
+             "Registrations LEFT JOIN WaitingFor ON personnr = student AND course = code " + 
+             "WHERE Registrations.personnr = ?");
+        registrations.setString(1, student);
+
+        PreparedStatement gradPath = conn.prepareStatement
+            ("SELECT * FROM PathToGraduation WHERE PathToGraduation.\"Person number\" = ?");
+        gradPath.setString(1, student);
+
+        ResultSet rsFollowing = following.executeQuery();
+        ResultSet rsCourses = courses.executeQuery();
+        ResultSet rsRegistrations = registrations.executeQuery();
+        ResultSet rsGradPath = gradPath.executeQuery();
+
+        rsFollowing.next();
+        rsGradPath.next();
+
+        System.out.println("Information for student " + student);
+        System.out.println("-------------------------------------");
+        System.out.println("Name: " + rsFollowing.getString("Student Name"));
+        System.out.println("Student ID: " + rsFollowing.getString("Student ID"));
+        System.out.println("Program: " + rsFollowing.getString("Program"));
+        System.out.println("Branch: " + rsFollowing.getString("Branch"));
         System.out.println("");
+        System.out.println("Read courses (name (code), credits: grade)");
+        while (rsCourses.next()) {
+            System.out.println(String.format(" %s (%s), %.1fp: %s", 
+                    rsCourses.getString("Course Name"),
+                    rsCourses.getString("Course Code"),
+                    rsCourses.getFloat("Credits"),
+                    rsCourses.getString("GRADE")));
         }
+        System.out.println("");
+        System.out.println("Registered courses (name (code): status)");
+        while (rsRegistrations.next()) {
+            String status = rsRegistrations.getString("Waiting Status");
+            System.out.print(String.format(" %s (%s): %s",
+                    rsRegistrations.getString("name"),
+                    rsRegistrations.getString("code"),
+                    status));
+            if (status.equals("waiting")) {
+                System.out.println(String.format(" as nr %d",
+                        rsRegistrations.getInt("placeinlist")));
+            } else {
+                System.out.println("");
+            }
+
+        }
+        System.out.println("");
+        System.out.println("Seminar courses taken: " + rsGradPath.getInt("Number of Seminar"));
+        System.out.println("Math credits taken: " + rsGradPath.getFloat("Mathematical credits"));
+        System.out.println("Research credits taken: " + rsGradPath.getFloat("Research credits"));
+        System.out.println("Total credits taken: " + rsGradPath.getFloat("Total credits"));
+        System.out.println("Fulfills the requirements for graduation: " + rsGradPath.getString("Can graduate"));
+        System.out.println("-------------------------------------");
+        System.out.println("");
+
     }
 
     /* Register: Given a student id number and a course code, this function
