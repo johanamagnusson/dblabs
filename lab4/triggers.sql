@@ -3,7 +3,34 @@ TRIGGER AS $$
 DECLARE numStudents INT;
 DECLARE maxNumStudents INT;
 DECLARE newPlaceInList INT;
+DECLARE waitingStatus TEXT;
 BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM Registrations
+        WHERE Registrations.personnr = NEW.personnr AND
+            Registrations.code = NEW.code
+        ) THEN
+        waitingStatus := "Waiting Status"
+        FROM Registrations
+        WHERE Registrations.personnr = NEW.personnr AND
+            Registrations.code = New.code;
+        IF waitingStatus = 'registered' THEN
+            RAISE EXCEPTION 'Student already registered';
+        ELSE
+            RAISE EXCEPTION 'Student already waiting';
+        END IF;
+    END IF;
+
+    IF EXISTS (
+        SELECT 1
+        FROM PassedCourses
+        WHERE PassedCourses.personnr = NEW.personnr AND
+            PassedCourses.code = NEW.code
+        ) THEN
+        RAISE EXCEPTION 'Student already passed';
+    END IF;
+
     IF NOT EXISTS (
         SELECT prerequisity
         FROM HasPrerequisities
@@ -64,7 +91,7 @@ DECLARE maxNumStudents INT;
 
 BEGIN
     IF EXISTS (SELECT 1 FROM Registrations WHERE
-        Registrations.personnr = OLD.personnr) THEN
+        Registrations.personnr = OLD.personnr AND Registrations.code = OLD.code) THEN
         waitingStatus := Registrations."Waiting Status"
         FROM Registrations
         WHERE Registrations.personnr = OLD.personnr AND

@@ -161,7 +161,6 @@ public class StudentPortal
     static void registerStudent(Connection conn, String student, String course)
     throws SQLException
     {
-        // TODO: Your implementation here
         PreparedStatement register = conn.prepareStatement
             ("INSERT INTO Registrations (code, personnr) VALUES (?, ?)");
         register.setString(1, course);
@@ -169,16 +168,23 @@ public class StudentPortal
 
         try {
             register.executeUpdate();
-        } catch (SQLException se) {
-            String SQLState = se.getSQLState();
-            if (SQLState.equals("23505")) {
-                System.out.println("Student already ");
+
+            PreparedStatement courseInfo = conn.prepareStatement
+                ("SELECT code, name, \"Waiting Status\" FROM Registrations WHERE code = ?");
+            courseInfo.setString(1, course);
+            ResultSet rsCourseInfo = courseInfo.executeQuery();
+            rsCourseInfo.next();
+            if (rsCourseInfo.getString("Waiting Status").equals("waiting")) {
+                System.out.println(String.format("Course %s %s is full, you are " + 
+                            "put on the waiting list", course,
+                            rsCourseInfo.getString("name")));
+            } else {
+                System.out.println(String.format("You are now successfully registered to course %s %s!",
+                            course, rsCourseInfo.getString("name")));
             }
-            System.out.println(se.getSQLState() + se);
+        } catch (SQLException se) {
+            System.out.println(se.getMessage());
         }
-
-
-
     }
 
     /* Unregister: Given a student id number and a course code, this function
@@ -187,6 +193,16 @@ public class StudentPortal
     static void unregisterStudent(Connection conn, String student, String course)
     throws SQLException
     {
-        // TODO: Your implementation here
+        PreparedStatement delete = conn.prepareStatement
+            ("DELETE FROM Registrations WHERE personnr = ? AND code = ?");
+        delete.setString(1, student);
+        delete.setString(2, course);
+
+        try {
+            delete.executeUpdate();
+            System.out.println("Course successfully unregistered");
+        } catch (SQLException se) {
+            System.out.println(se.getMessage());
+        }
     }
 }

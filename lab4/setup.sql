@@ -447,9 +447,11 @@ SELECT DISTINCT
     Courses.coursename AS "name",
     Students.personNr AS "personnr",
     CASE
-        WHEN EXISTS (SELECT * FROM IsTaking WHERE student = Students.personNr)
+        WHEN EXISTS (SELECT * FROM IsTaking WHERE student = Students.personNr
+            AND course = Courses.code)
         THEN 'registered'
-        WHEN EXISTS (SELECT * FROM WaitingFor WHERE student = Students.personNr)
+        WHEN EXISTS (SELECT * FROM WaitingFor WHERE student = Students.personNr
+            AND course = Courses.code)
         THEN 'waiting'
     END AS "Waiting Status"
 FROM Students, Courses, IsTaking, WaitingFor
