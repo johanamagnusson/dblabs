@@ -366,6 +366,8 @@ INSERT INTO Recommended (branch, program, course) VALUES ('Theoretical Chemistry
 INSERT INTO LimitedCourses (code, maxStudents) VALUES ('MAT102',3);
 INSERT INTO IsTaking (student, course) VALUES ('900610-4212', 'MAT102');
 INSERT INTO IsTaking (student, course) VALUES ('910420-5293', 'MAT102');
+INSERT INTO IsTaking (student, course) VALUES ('440410-3553', 'MAT102');
+INSERT INTO IsTaking (student, course) VALUES ('921002-4536', 'MAT102');
 INSERT INTO HasTaken (student, course, grade) VALUES ('900410-3553', 'MAT101', '5');
 INSERT INTO HasTaken (student, course, grade) VALUES ('921002-4536', 'MAT101', '5');
 INSERT INTO HasTaken (student, course, grade) VALUES ('740410-7785', 'MAT101', '5');
