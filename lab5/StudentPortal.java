@@ -176,7 +176,6 @@ public class StudentPortal
             courseInfo.setString(2, student);
             ResultSet rsCourseInfo = courseInfo.executeQuery();
             rsCourseInfo.next();
-            System.out.println(rsCourseInfo.getString("Waiting Status"));
             if (rsCourseInfo.getString("Waiting Status").equals("waiting")) {
                 System.out.println(String.format("Course %s %s is full, you are " + 
                             "put on the waiting list", course,
