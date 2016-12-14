@@ -170,10 +170,13 @@ public class StudentPortal
             register.executeUpdate();
 
             PreparedStatement courseInfo = conn.prepareStatement
-                ("SELECT code, name, \"Waiting Status\" FROM Registrations WHERE code = ?");
+                ("SELECT code, name, \"Waiting Status\" FROM Registrations WHERE" + 
+                " code = ? AND personnr = ?");
             courseInfo.setString(1, course);
+            courseInfo.setString(2, student);
             ResultSet rsCourseInfo = courseInfo.executeQuery();
             rsCourseInfo.next();
+            System.out.println(rsCourseInfo.getString("Waiting Status"));
             if (rsCourseInfo.getString("Waiting Status").equals("waiting")) {
                 System.out.println(String.format("Course %s %s is full, you are " + 
                             "put on the waiting list", course,
